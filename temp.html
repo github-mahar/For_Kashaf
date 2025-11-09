@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girls' Corner — Mindful Moments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #FFF5F7;
+            font-family: 'Poppins', sans-serif;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23FBCFE8' fill-opacity='0.4'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(252, 231, 243, 0.5);
+            border: 1px solid rgba(252, 231, 243, 0.8);
+        }
+        .emotion-btn {
+            background: white;
+            color: #DB2777;
+            border: 2px solid #FCE7F3;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.5rem;
+        }
+        .emotion-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.1);
+            background: #FCE7F3;
+        }
+        .emotion-btn.active {
+            background: #FCE7F3;
+            border-color: #DB2777;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="card max-w-4xl w-full p-8">
+        <!-- Header with Icon -->
+        <div class="text-center mb-8">
+            <div class="inline-block p-4 bg-pink-50 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-semibold text-pink-700 mb-2">Girls' Corner — Mindful Moments</h1>
+            <p class="text-pink-500">Sweet suggestions for happy hearts</p>
+        </div>
+
+        <!-- Emotion Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="emotion-btn" data-emotion="Dreamy">Dreamy</button>
+            <button class="emotion-btn" data-emotion="Kind">Kind</button>
+            <button class="emotion-btn" data-emotion="Brave">Brave</button>
+            <button class="emotion-btn" data-emotion="Curious">Curious</button>
+            <button class="emotion-btn" data-emotion="Calm">Calm</button>
+        </div>
+
+        <!-- Content Section -->
+        <div class="mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-medium text-pink-600">For: <span class="current-emotion">Kind</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-6">
+                <!-- Quote -->
+                <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm">
+                    <h3 class="font-medium text-pink-600 mb-4">Sweet Quote</h3>
+                    <div class="space-y-4">
+                        <p id="quran-arabic" class="text-right text-lg leading-relaxed font-medium text-gray-800"></p>
+                        <p id="quran-translation" class="text-gray-600 leading-relaxed"></p>
+                        <p id="quran-reference" class="text-sm text-pink-400 italic"></p>
+                    </div>
+                </div>
+
+                <!-- Challenge -->
+                <div class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm">
+                    <h3 class="font-medium text-pink-600 mb-4">Daily Challenge</h3>
+                    <div class="space-y-4">
+                        <p id="hadith-translation" class="text-gray-600 leading-relaxed"></p>
+                        <p id="hadith-reference" class="text-sm text-pink-400 italic"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-4">
+                <button class="emotion-btn" id="copy-btn">
+                    <span class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
+                            <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                        </svg>
+                        Share
+                    </span>
+                </button>
+                <button class="emotion-btn" id="another-btn">
+                    <span class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                        </svg>
+                        More Ideas
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="text-center text-sm text-pink-400 mt-8">
+            This Designed with love, just for you. Keep shining bright!
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const EMOTIONS = {
+            dreamy: {
+                quotes: [
+                    { arabic: "وَفِي السَّمَاءِ رِزْقُكُمْ وَمَا تُوعَدُونَ", translation: "And in the heaven is your provision and whatever you are promised.", reference: "Quran 51:22" },
+                    { arabic: "سَنُرِيهِمْ آيَاتِنَا فِي الْآفَاقِ", translation: "We will show them Our signs in the horizons.", reference: "Quran 41:53" }
+                ],
+                challenges: [
+                    { translation: "Take a moment to look at the stars tonight", reference: "Daily Challenge" },
+                    { translation: "Write down a dream or wish you have", reference: "Self-Reflection" }
+                ]
+            },
+            kind: {
+                quotes: [
+                    { arabic: "وَقُولُوا لِلنَّاسِ حُسْنًا", translation: "And speak to people with good words", reference: "Quran 2:83" },
+                    { arabic: "وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ", translation: "And cooperate in righteousness and goodness", reference: "Quran 5:2" }
+                ],
+                challenges: [
+                    { translation: "Share a genuine compliment with someone today", reference: "Daily Challenge" },
+                    { translation: "Do a random act of kindness", reference: "Kind Action" }
+                ]
+            },
+            brave: {
+                quotes: [
+                    { arabic: "لَا تَخَفْ وَلَا تَحْزَنْ", translation: "Do not fear and do not grieve", reference: "Quran 29:33" },
+                    { arabic: "فَلَا تَهِنُوا وَلَا تَحْزَنُوا", translation: "Do not lose heart, nor fall into despair", reference: "Quran 3:139" }
+                ],
+                challenges: [
+                    { translation: "Try something new today, even if it's small", reference: "Daily Challenge" },
+                    { translation: "Stand up for what you believe in", reference: "Brave Action" }
+                ]
+            },
+            curious: {
+                quotes: [
+                    { arabic: "وَقُل رَّبِّ زِدْنِي عِلْمًا", translation: "And say: My Lord, increase me in knowledge", reference: "Quran 20:114" },
+                    { arabic: "أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ", translation: "Then do they not reflect upon the Quran?", reference: "Quran 4:82" }
+                ],
+                challenges: [
+                    { translation: "Learn something new about the world today", reference: "Daily Challenge" },
+                    { translation: "Ask thoughtful questions about things you're curious about", reference: "Learning Action" }
+                ]
+            },
+            calm: {
+                quotes: [
+                    { arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", translation: "Unquestionably, by the remembrance of Allah hearts are assured", reference: "Quran 13:28" },
+                    { arabic: "فَاصْبِرْ صَبْرًا جَمِيلًا", translation: "So be patient with gracious patience", reference: "Quran 70:5" }
+                ],
+                challenges: [
+                    { translation: "Take five deep breaths when you feel overwhelmed", reference: "Daily Challenge" },
+                    { translation: "Find a quiet moment for reflection", reference: "Calm Practice" }
+                ]
+            }
+        };
+
+        // Global variables
+        let currentEmotion = 'Kind';
+        let isLoading = false;
+
+        // Helper functions
+        function pickRandom(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function updateEmotionDisplay(emotion) {
+            document.querySelector('.current-emotion').textContent = emotion;
+            document.querySelectorAll('.emotion-btn').forEach(btn => {
+                if (btn.dataset.emotion === emotion) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function showLoading(element, show) {
+            if (!element) return;
+            if (show) {
+                if (element.querySelector('[data-loader]')) return;
+                const loader = document.createElement('div');
+                loader.setAttribute('data-loader', 'true');
+                loader.className = 'flex items-center justify-center gap-2 py-4';
+                loader.innerHTML = `
+                    <div class="flex items-center gap-1">
+                        <span class="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style="animation-delay: 0s"></span>
+                        <span class="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                        <span class="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                    </div>
+                    <span class="text-sm text-pink-500">Finding something special...</span>
+                `;
+                element.appendChild(loader);
+            } else {
+                const existing = element.querySelector('[data-loader]');
+                if (existing) existing.remove();
+            }
+        }
+
+        async function generateContent(emotion) {
+            if (isLoading) return;
+            isLoading = true;
+
+            const elements = {
+                arabic: document.getElementById('quran-arabic'),
+                translation: document.getElementById('quran-translation'),
+                reference: document.getElementById('quran-reference'),
+                challenge: document.getElementById('hadith-translation'),
+                challengeRef: document.getElementById('hadith-reference')
+            };
+
+            Object.values(elements).forEach(el => showLoading(el, true));
+
+            await new Promise(r => setTimeout(r, 500 + Math.random() * 500));
+
+            try {
+                const content = EMOTIONS[emotion.toLowerCase()];
+                const quote = pickRandom(content.quotes);
+                const challenge = pickRandom(content.challenges);
+
+                elements.arabic.textContent = quote.arabic;
+                elements.translation.textContent = quote.translation;
+                elements.reference.textContent = quote.reference;
+                elements.challenge.textContent = challenge.translation;
+                elements.challengeRef.textContent = challenge.reference;
+
+            } catch (error) {
+                console.error('Error generating content:', error);
+            } finally {
+                Object.values(elements).forEach(el => showLoading(el, false));
+                isLoading = false;
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up emotion buttons
+            document.querySelectorAll('.emotion-btn[data-emotion]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentEmotion = btn.dataset.emotion;
+                    updateEmotionDisplay(currentEmotion);
+                    generateContent(currentEmotion);
+                });
+            });
+
+            // Set up action buttons
+            document.getElementById('copy-btn').addEventListener('click', () => {
+                const content = `
+Quote:
+${document.getElementById('quran-arabic').textContent}
+${document.getElementById('quran-translation').textContent}
+${document.getElementById('quran-reference').textContent}
+
+Challenge:
+${document.getElementById('hadith-translation').textContent}
+${document.getElementById('hadith-reference').textContent}
+                `.trim();
+
+                navigator.clipboard.writeText(content).then(() => {
+                    const btn = document.getElementById('copy-btn');
+                    const originalContent = btn.innerHTML;
+                    btn.innerHTML = '<span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Copied!</span>';
+                    setTimeout(() => btn.innerHTML = originalContent, 2000);
+                });
+            });
+
+            document.getElementById('another-btn').addEventListener('click', () => {
+                generateContent(currentEmotion);
+            });
+
+            // Initialize content
+            updateEmotionDisplay(currentEmotion);
+            generateContent(currentEmotion);
+        });
+    </script>
+</body>
+</html>

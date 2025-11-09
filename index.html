@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Therapy Cards — Mindful Moments</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom soft theme styles */
+      body {
+        background: #fff5f7;
+        font-family: "Poppins", sans-serif;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23FBCFE8' fill-opacity='0.4'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(252, 231, 243, 0.5);
+        border: 1px solid rgba(252, 231, 243, 0.8);
+      }
+      .emotion-btn {
+        background: white;
+        color: #db2777;
+        border: 2px solid #fce7f3;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem;
+      }
+      .emotion-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(219, 39, 119, 0.1);
+        background: #fce7f3;
+      }
+      .emotion-btn.active {
+        background: #fce7f3;
+        border-color: #db2777;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #ec4899;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <div class="card max-w-4xl w-full p-8">
+      <!-- Header with Icon -->
+      <div class="text-center mb-8">
+        <div class="inline-block p-4 bg-pink-50 rounded-full mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-pink-600"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-semibold text-pink-700 mb-2">
+          Therapy Cards
+        </h1>
+        <p class="text-pink-500">Sweet suggestions for happy hearts</p>
+      </div>
+
+      <!-- Emotion Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button class="emotion-btn" data-emotion="Happy">Happy</button>
+        <button class="emotion-btn" data-emotion="Sad">Sad</button>
+        <button class="emotion-btn" data-emotion="Depressed">Depressed</button>
+        <button class="emotion-btn" data-emotion="Angry">Angry</button>
+        <button class="emotion-btn" data-emotion="Calm">Calm</button>
+      </div>
+
+      <!-- Content Section -->
+      <div class="mb-8">
+        <div class="text-center mb-6">
+          <h2 class="text-xl font-medium text-pink-600">
+            For: <span class="current-emotion">Happy</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-6">
+          <!-- Quote -->
+          <div
+            class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm"
+          >
+            <h3 class="font-medium text-pink-600 mb-4">Quranic Verse</h3>
+            <div class="space-y-4">
+              <p
+                id="quran-arabic"
+                class="text-right text-lg leading-relaxed font-medium text-gray-800"
+              ></p>
+              <p
+                id="quran-translation"
+                class="text-gray-600 leading-relaxed"
+              ></p>
+              <p id="quran-reference" class="text-sm text-pink-400 italic"></p>
+            </div>
+          </div>
+
+          <!-- Challenge -->
+          <div
+            class="bg-white p-6 rounded-2xl border-2 border-pink-100 shadow-sm"
+          >
+            <h3 class="font-medium text-pink-600 mb-4">Hadith</h3>
+            <div class="space-y-4">
+              <p
+                id="hadith-translation"
+                class="text-gray-600 leading-relaxed"
+              ></p>
+              <p id="hadith-reference" class="text-sm text-pink-400 italic"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-center gap-4">
+          <button class="emotion-btn" id="copy-btn">
+            <span class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z"
+                />
+                <path
+                  d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"
+                />
+              </svg>
+              Share
+            </span>
+          </button>
+          <button class="emotion-btn" id="another-btn">
+            <span class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              More Ideas
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center text-sm text-pink-400 mt-8">
+        This Designed with love, just for Kashaf Ud Duja. Keep shining bright!
+      </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentEmotion = 'Kind';  // Default emotion
+        let isLoading = false;
+        
+        // Helper: pick random element
+        function pickRandom(arr) {
+            if (!Array.isArray(arr) || arr.length === 0) return null;
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+        
+        // Update current emotion display
+        function updateEmotionDisplay(emotion) {
+            document.querySelector('.current-emotion').textContent = emotion;
+            
+            // Update button states
+            document.querySelectorAll('.emotion-btn').forEach(btn => {
+                if (btn.dataset.emotion === emotion) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }              // Helper: pick random element
+              function pickRandom(arr) {
+                  if (!Array.isArray(arr) || arr.length === 0) return null;
+                  return arr[Math.floor(Math.random() * arr.length)];
+              }
+
+
+
+              // Mock data with expanded verses and sayings for each emotion
+              const mockData = {
+                  happy: {
+                      quran: [
+                          { arabic: 'قُلْ بِفَضْلِ اللَّهِ وَبِرَحْمَتِهِ فَبِذَٰلِكَ فَلْيَفْرَحُوا', translation: 'Say, "In the bounty of Allah and in His mercy - in that let them rejoice."', reference: 'Quran 10:58' },
+                          { arabic: 'لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ', translation: 'If you are grateful, I will surely increase you [in favor].', reference: 'Quran 14:7' },
+                          { arabic: 'فَبَشِّرْ عِبَادِ', translation: 'So give tidings to My servants.', reference: 'Quran 39:17' },
+                          { arabic: 'وَٱذْكُرُوا نِعْمَتَ اللَّهِ', translation: 'Remember the favors of Allah.', reference: 'Quran 16:18' },
+                          { arabic: 'فَٱبْشِرُوا بِبَيْعِكُمْ', translation: 'So give good tidings of your sale.', reference: 'Quran 2:275' },
+                          { arabic: 'وَجَعَلْنَاكُمْ شُعُوبًا', translation: 'And We made you into nations.', reference: 'Quran 49:13' },
+                          { arabic: 'وَمَنْ يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا', translation: 'Whoever fears Allah, He will make for him a way out.', reference: 'Quran 65:2' },
+                          { arabic: 'إِنَّ رَبَّكَ هُوَ الْقَوِيُّ الْعَزِيزُ', translation: 'Indeed, your Lord is the Powerful, the Exalted in Might.', reference: 'Quran 58:6' },
+                          { arabic: 'وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّث', translation: 'And proclaim the favor of your Lord.', reference: 'Quran 93:11' },
+                          { arabic: 'قُلْ مَا يَعْبَأُ بِكُمْ رَبِّي لَوْلَا دُعَاؤُكُمْ', translation: 'Say: My Lord would not care for you except for your supplication.', reference: 'Quran (various)' },
+                          { arabic: 'هُوَ الَّذِي يُنَزِّلُ السَّكِينَةَ', translation: 'He it is who sends down tranquility.', reference: 'Quran 48:4' },
+                          { arabic: 'وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ', translation: 'My success is only by Allah.', reference: 'Quran 11:88' },
+                          { arabic: 'وَلِكُلِ نَفْسٍ مَا كَسَبَتْ', translation: 'For every soul is what it earned.', reference: 'Quran 2:286' },
+                          { arabic: 'فَاذْكُرُونِي أَذْكُرْكُمْ', translation: 'Therefore remember Me; I will remember you.', reference: 'Quran 2:152' },
+                          { arabic: 'إِنَّ مَعَ العُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:6' },
+                          { arabic: 'وَبَشِّرِ الصَّابِرِينَ', translation: 'And give good tidings to the patient.', reference: 'Quran 2:155' },
+                          { arabic: 'وَمَا كَانَ لِنَفْسٍ أَن تُؤْمِنَ', translation: 'It is not for a soul to believe...', reference: 'Quran 10:100' },
+                          { arabic: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', translation: 'Indeed, Allah is with the patient.', reference: 'Quran 2:153' },
+                          { arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', translation: 'Indeed, in the remembrance of Allah do hearts find rest.', reference: 'Quran 13:28' },
+                          { arabic: 'وَٱللَّهُ خَيْرُ الرَّازِقِينَ', translation: 'And Allah is the best of providers.', reference: 'Quran 62:11' }
+                      ],
+                      hadith: [
+                          { translation: 'Actions are judged by intentions.', reference: 'Sahih al-Bukhari' },
+                          { translation: 'A kind word is a charity.', reference: 'Sahih Muslim' },
+                          { translation: 'Smiling at your brother is charity.', reference: 'At-Tirmidhi' },
+                          { translation: 'The best among you are those who bring most benefit to others.', reference: 'Al-Mu’jam' },
+                          { translation: 'Feed the hungry and visit the sick.', reference: 'Al-Bukhari/Muslim' },
+                          { translation: 'Whoever relieves a believer’s distress, Allah will relieve his distress.', reference: 'Sahih Muslim' },
+                          { translation: 'The strong believer is better and more beloved than the weak believer.', reference: 'Sahih Muslim' },
+                          { translation: 'The best of people are those most beneficial to people.', reference: 'Al-Mu’jam' },
+                          { translation: 'Paradise is for those who show mercy to others.', reference: 'Sahih Muslim' },
+                          { translation: 'The best deed is to bring happiness to a Muslim.', reference: 'At-Tabarani' },
+                          { translation: 'Allah loves those who return thanks.', reference: 'Sunan Ibn Majah' },
+                          { translation: 'Do good to others and Allah will do good to you.', reference: 'Al-Baihaqi' },
+                          { translation: 'He who forgives, Allah will forgive him.', reference: 'Sahih Muslim' },
+                          { translation: 'Helping others is an act beloved to Allah.', reference: 'Various' },
+                          { translation: 'Charity extinguishes sin like water extinguishes fire.', reference: 'At-Tabarani' },
+                          { translation: 'Speak good or remain silent.', reference: 'Sahih Muslim' },
+                          { translation: 'Make things easy and you will be loved.', reference: 'Sahih Bukhari' },
+                          { translation: 'Kindness is a mark of faith.', reference: 'Sahih Muslim' },
+                          { translation: 'A believer to another believer is like a building.', reference: 'Sahih Muslim' },
+                          { translation: 'Trust in Allah and you will find peace.', reference: 'Prophetic Saying' }
+                      ]
+                  },
+                  sad: {
+                      quran: [
+                          { arabic: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:6' },
+                          { arabic: 'إِنَّمَا يُوَفَّى ٱلصَّابِرُونَ أَجْرَهُمْ', translation: 'The patient will be given their reward.', reference: 'Quran (various)' },
+                          { arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', translation: 'In the remembrance of Allah do hearts find rest.', reference: 'Quran 13:28' },
+                          { arabic: 'وَمَآ أَدْرَىٰكَ مَا هِىَ ٱلسَّاعَةُ', translation: 'What do you know of the Hour?', reference: 'Quran (various)' },
+                          { arabic: 'وَٱصْبِرْ وَمَا صَبْرُكَ إِلَّا بِٱللَّهِ', translation: 'And be patient; your patience is by Allah.', reference: 'Quran 16:127' },
+                          { arabic: 'إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا', translation: 'Indeed Allah is with those who fear Him.', reference: 'Quran 16:128' },
+                          { arabic: 'وَٱلَّذِينَ يُمَسِّكُونَ بِالْكِتَابِ', translation: 'Those who hold fast to the Book.', reference: 'Quran (various)' },
+                          { arabic: 'إِنَّ رَبَّكَ لَبِالْمِرْصَادِ', translation: 'Indeed, your Lord is ever Watchful.', reference: 'Quran 18:21' },
+                          { arabic: 'فَاعْتَبِرُوا يَا أُولِي الْأَبْصَارِ', translation: 'So take warning, O people of insight.', reference: 'Quran 59:2' },
+                          { arabic: 'وَمَا كَانَ ٱلْأَمْرُ عَلَى ٱللَّهِ بِغَيْبٍ', translation: 'The matter with Allah is not unseen.', reference: 'Quran 27:65' },
+                          { arabic: 'وَقَدْ نَفَعَتْهُمْ ذِكْرَىٰٓ', translation: 'And remembrance benefited them.', reference: 'Quran (various)' },
+                          { arabic: 'وَٱلصَّبْرُ جَمِيلٌ', translation: 'Patience is beautiful.', reference: 'Quran (concept)' },
+                          { arabic: 'إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ', translation: 'Allah does not allow the reward of the doers of good to be lost.', reference: 'Quran 9:120' },
+                          { arabic: 'وَلَرَبِّي لَسَوْفَ تُحْشَرُونَ', translation: 'And to my Lord you will be gathered.', reference: 'Quran (various)' },
+                          { arabic: 'كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ', translation: 'Every soul shall taste death.', reference: 'Quran 29:57' },
+                          { arabic: 'فَسَبِّحْ بِحَمْدِ رَبِّكَ', translation: 'So glorify the praises of your Lord.', reference: 'Quran 15:98' },
+                          { arabic: 'وَلَا تَهِنُوا وَلَا تَحْزَنُوا', translation: 'Do not lose heart and do not grieve.', reference: 'Quran 3:139' },
+                          { arabic: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:5' },
+                          { arabic: 'وَٱلَّذِينَ صَبَرُوا۟ ابْتِغَآءَ وَجْهِ رَبِّهِمْ', translation: 'Those who are patient seeking the pleasure of their Lord.', reference: 'Quran (various)' },
+                          { arabic: 'وَٱللَّهُ غَفُورٌ رَحِيمٌ', translation: 'And Allah is Forgiving and Merciful.', reference: 'Quran 39:53' }
+                      ],
+                      hadith: [
+                          { translation: 'Do not despair of the mercy of Allah.', reference: 'Sahih Muslim' },
+                          { translation: 'Seek help through patience and prayer.', reference: 'Sahih Muslim' },
+                          { translation: 'When a servant is tested, his reward is increased.', reference: 'Sahih Muslim' },
+                          { translation: 'Turn to Allah in repentance and hope.', reference: 'Various' },
+                          { translation: 'Tough times are followed by relief.', reference: 'Prophetic Saying' },
+                          { translation: 'Remember the believer who comforts another.', reference: 'Sahih Bukhari' },
+                          { translation: 'Supplication is the essence of worship.', reference: 'Various' },
+                          { translation: 'Keep hope in Allah’s mercy.', reference: 'Various' },
+                          { translation: 'Patience is rewarded beyond measure.', reference: 'Sahih Muslim' },
+                          { translation: 'Seek solace in remembrance of Allah.', reference: 'Various' },
+                          { translation: 'Allah responds to sincere prayers.', reference: 'Sahih Muslim' },
+                          { translation: 'Support one another in hardship.', reference: 'At-Tirmidhi' },
+                          { translation: 'Charity relieves suffering.', reference: 'Sahih Muslim' },
+                          { translation: 'Allah tests those He loves.', reference: 'Prophetic Saying' },
+                          { translation: 'Rely on Allah and be steadfast.', reference: 'Various' },
+                          { translation: 'Find comfort in reading the Quran.', reference: 'Sahih Muslim' },
+                          { translation: 'Small acts of worship bring great reward.', reference: 'Prophetic Saying' },
+                          { translation: 'Turn to community for support.', reference: 'Various' },
+                          { translation: 'Remember prayer at times of need.', reference: 'Sahih Bukhari' },
+                          { translation: 'Keep your tongue moist with the remembrance of Allah.', reference: 'Sahih Muslim' }
+                      ]
+                  },
+                  depressed: {
+                      quran: [
+                          { arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', translation: 'In the remembrance of Allah do hearts find rest.', reference: 'Quran 13:28' },
+                          { arabic: 'وَمَآ أَدْرَىٰكَ مَا السَّاعَةُ', translation: 'What do you know of the Hour?', reference: 'Quran (various)' },
+                          { arabic: 'وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ', translation: 'Seek help through patience and prayer.', reference: 'Quran 2:45' },
+                          { arabic: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:6' },
+                          { arabic: 'ادْعُونِي أَسْتَجِبْ لَكُمْ', translation: 'Call upon Me; I will respond to you.', reference: 'Quran 40:60' },
+                          { arabic: 'إِنَّ اللَّهَ مَعَ الْمُحْسِنِينَ', translation: 'Indeed, Allah is with the doers of good.', reference: 'Quran 29:69' },
+                          { arabic: 'قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا', translation: 'Say: Nothing will befall us except what Allah has decreed for us.', reference: 'Quran 9:51' },
+                          { arabic: 'يَهْدِيهِمْ وَيُشْفِيهِمْ', translation: 'He guides them and heals them.', reference: 'Quran (concept)' },
+                          { arabic: 'إِنَّ رَبَّكَ وَاسِعُ الْمَغْفِرَةِ', translation: 'Indeed, your Lord is vast in forgiveness.', reference: 'Quran (various)' },
+                          { arabic: 'وَسِعَتْ رَحْمَتِي', translation: 'My mercy encompasses all things.', reference: 'Quran 7:156' },
+                          { arabic: 'وَٱلَّذِينَ يُؤْمِنُونَ وَيَتَّقُونَ أُو۟لَـٰٓئِكَ أَمْوَٰتٌ', translation: 'Those who believe and fear Allah are in safety.', reference: 'Quran (various)' },
+                          { arabic: 'وَلَا تَهِنُوا وَلَا تَحْزَنُوا', translation: 'Do not lose heart and do not grieve.', reference: 'Quran 3:139' },
+                          { arabic: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translation: 'Say: He is Allah, the One.', reference: 'Quran 112:1' },
+                          { arabic: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:5' },
+                          { arabic: 'وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ', translation: 'Whoever relies upon Allah – then He is sufficient for him.', reference: 'Quran 65:3' },
+                          { arabic: 'هُوَ الَّذِي يُسَيِّرُكُمْ', translation: 'He is the One who makes you move.', reference: 'Quran (various)' },
+                          { arabic: 'وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ', translation: 'My mercy encompasses everything.', reference: 'Quran (concept)' },
+                          { arabic: 'قَدْ أَفْلَحَ مَن زَكَّىٰهَا', translation: 'He has succeeded who purifies it.', reference: 'Quran 91:9' },
+                          { arabic: 'وَٱللَّهُ خَيْرُ الرَّٰحِمِينَ', translation: 'And Allah is the best of merciful.', reference: 'Quran (various)' },
+                          { arabic: 'ٱللَّهُ نُورُ السَّمَـٰوَاتِ وَٱلْأَرْضِ', translation: 'Allah is the Light of the heavens and the earth.', reference: 'Quran 24:35' }
+                      ],
+                      hadith: [
+                          { translation: 'Do not despair of the mercy of Allah.', reference: 'Sahih Muslim' },
+                          { translation: 'Turn to Allah in all matters.', reference: 'Various' },
+                          { translation: 'Supplication is powerful and healing.', reference: 'Various' },
+                          { translation: 'Seek help in patience and prayer.', reference: 'Sahih Muslim' },
+                          { translation: 'The Prophet advised seeking comfort in dhikr.', reference: 'Sahih' },
+                          { translation: 'Small acts of worship lighten hardship.', reference: 'Prophetic Saying' },
+                          { translation: 'Keep hope and make dua.', reference: 'Various' },
+                          { translation: 'Companionship comforts the heart.', reference: 'At-Tirmidhi' },
+                          { translation: 'Charity removes afflictions.', reference: 'Sahih Muslim' },
+                          { translation: 'Patience yields reward beyond measure.', reference: 'Sahih Muslim' },
+                          { translation: 'Visit the sick and comfort them.', reference: 'Sahih Bukhari' },
+                          { translation: 'Return thanks in good times.', reference: 'Sunan Ibn Majah' },
+                          { translation: 'Rely on Allah and act with hope.', reference: 'Various' },
+                          { translation: 'Keep close to the Quran in sadness.', reference: 'Various' },
+                          { translation: 'Share your burden with trusted companions.', reference: 'Prophetic Saying' },
+                          { translation: 'Forgive and let go for inner peace.', reference: 'Sahih Muslim' },
+                          { translation: 'Make your heart firm with faith.', reference: 'Various' },
+                          { translation: 'Remembrance of Allah soothes the soul.', reference: 'Quranic Teaching' },
+                          { translation: 'Do small good deeds consistently.', reference: 'Prophetic Saying' },
+                          { translation: 'Seek refuge in prayer and patience.', reference: 'Sahih Muslim' }
+                      ]
+                  },
+                  angry: {
+                      quran: [
+                          { arabic: 'وَالْكَاظِمِينَ الْغَيْظَ', translation: 'And those who restrain anger', reference: 'Quran 3:134' },
+                          { arabic: 'وَالْعَافِينَ عَنِ النَّاسِ', translation: 'And those who pardon people', reference: 'Quran 42:40' },
+                          { arabic: 'خُذِ الْعَفْوَ وَأْمُرْ بِالْعُرْفِ', translation: 'Forgive and command what is right', reference: 'Quran 7:199' },
+                          { arabic: 'إِنَّ اللّهَ يُحِبُّ الْمُقْسِطِينَ', translation: 'Indeed Allah loves the just.', reference: 'Quran 5:42' },
+                          { arabic: 'فَاصْفَحِ الصَّفْحَ الْجَمِيلَ', translation: 'So forgive with beautiful forgiveness', reference: 'Quran 7:199' },
+                          { arabic: 'وَلَا تَسْتَوِي الْحَسَنَةُ وَلَا السَّيِّئَةُ', translation: 'Good deed and evil deed are not equal', reference: 'Quran 41:34' },
+                          { arabic: 'وَٱلصّٰدِقُونَ وَٱلصّٰبِرُونَ', translation: 'Those who are truthful and patient', reference: 'Quran (various)' },
+                          { arabic: 'وَٱعْفُ عَنْهُمْ وَاصْفَحْ', translation: 'Pardon them and overlook', reference: 'Quran 64:14' },
+                          { arabic: 'وَٱلصَّالِحُونَ لَهُمْ مَغْفِرَةٌ', translation: 'And for the righteous will be forgiveness', reference: 'Quran (various)' },
+                          { arabic: 'أَصْبِرْ لِحُكْمِ رَبِّكَ', translation: 'Be patient for the decision of your Lord', reference: 'Quran 52:48' },
+                          { arabic: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا', translation: 'Indeed, with hardship comes ease.', reference: 'Quran 94:6' },
+                          { arabic: 'قُلْ يَـٰٓأَيُّهَا الَّذِينَ آمَنُوا۟', translation: 'O you who have believed...', reference: 'Quran (various)' },
+                          { arabic: 'وَلَا تَسْتَوِي الْحَسَنَةُ', translation: 'Goodness is not equal to badness', reference: 'Quran 41:34' },
+                          { arabic: 'إِنَّمَا الْمُؤْمِنُونَ', translation: 'Truly the believers...', reference: 'Quran (various)' },
+                          { arabic: 'فَاصْفَحِ الصَّفْحَ الْجَمِيلَ', translation: 'Adopt beautiful forgiveness', reference: 'Quran 7:199' },
+                          { arabic: 'ادْفَعْ بِالَّتِي هِيَ أَحْسَنُ', translation: 'Repel [evil] by that which is better', reference: 'Quran 41:34' },
+                          { arabic: 'وَٱللَّهُ غَفُورٌ رَحِيمٌ', translation: 'And Allah is Forgiving and Merciful.', reference: 'Quran 39:53' },
+                          { arabic: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', translation: 'Indeed, Allah is with the patient.', reference: 'Quran 2:153' },
+                          { arabic: 'وَأَحْسِنُوا۟ إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ', translation: 'And do good; indeed Allah loves the doers of good.', reference: 'Quran 2:195' },
+                          { arabic: 'وَٱصْبِرْ وَمَا صَبْرُكَ إِلَّا بِٱللَّهِ', translation: 'Be patient; your patience is by Allah.', reference: 'Quran 16:127' }
+                      ],
+                      hadith: [
+                          { translation: 'Control your anger and you will be rewarded.', reference: 'Sahih Muslim' },
+                          { translation: 'The strong man is not the one who overcomes people by his strength; rather he is the one who controls himself.', reference: 'Sahih Bukhari' },
+                          { translation: 'Pause before you react.', reference: 'Prophetic Saying' },
+                          { translation: 'Forgive and Allah will forgive you.', reference: 'Sahih Muslim' },
+                          { translation: 'Speak kindly even when angry.', reference: 'Prophetic Saying' },
+                          { translation: 'Lower your gaze and calm your heart.', reference: 'Various' },
+                          { translation: 'Charity cools the heart.', reference: 'At-Tabarani' },
+                          { translation: 'Control yourself and seek Allah’s help.', reference: 'Various' },
+                          { translation: 'Be gentle and you will find ease.', reference: 'Sahih Bukhari' },
+                          { translation: 'Anger comes from the devil; seek refuge in Allah.', reference: 'Sahih Muslim' },
+                          { translation: 'Respond with what is best.', reference: 'Quranic Teaching' },
+                          { translation: 'Make dua when you feel anger rising.', reference: 'Prophetic Saying' },
+                          { translation: 'Patience and forgiveness are noble.', reference: 'Various' },
+                          { translation: 'Practice self-restraint daily.', reference: 'Prophetic Saying' },
+                          { translation: 'Remember the reward for those who forgive.', reference: 'Sahih Muslim' },
+                          { translation: 'Seek company that soothes the heart.', reference: 'Various' },
+                          { translation: 'Lower your voice and be gentle.', reference: 'Prophetic Saying' },
+                          { translation: 'Reflect before you speak.', reference: 'Various' },
+                          { translation: 'Turn your anger into productive action.', reference: 'Prophetic Saying' },
+                          { translation: 'Control is a sign of true strength.', reference: 'Sahih Muslim' }
+                      ]
+                  },
+                  calm: {
+                      quran: [
+                          { arabic: 'ادْعُونِي أَسْتَجِبْ لَكُمْ', translation: 'Call upon Me; I will respond to you.', reference: 'Quran 40:60' },
+                          { arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', translation: 'In the remembrance of Allah do hearts find rest.', reference: 'Quran 13:28' },
+                          { arabic: 'هُوَ الَّذِي يُنَزِّلُ السَّكِينَةَ', translation: 'He it is who sends down tranquility.', reference: 'Quran 48:4' },
+                          { arabic: 'فَاذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا', translation: 'Remember Allah often.', reference: 'Quran (various)' },
+                          { arabic: 'وَأَنزَلْنَا مِنَ السَّمَاءِ مَاءً', translation: 'And We sent down water from the sky.', reference: 'Quran (various)' },
+                          { arabic: 'وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ', translation: 'Whosoever relies upon Allah, He is sufficient for him.', reference: 'Quran 65:3' },
+                          { arabic: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translation: 'Say: He is Allah, the One.', reference: 'Quran 112:1' },
+                          { arabic: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', translation: 'Indeed, Allah is with the patient.', reference: 'Quran 2:153' },
+                          { arabic: 'قَدْ أَفْلَحَ مَن زَكَّىٰهَا', translation: 'He has succeeded who purifies it.', reference: 'Quran 91:9' },
+                          { arabic: 'وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ', translation: 'My success is only by Allah.', reference: 'Quran 11:88' },
+                          { arabic: 'إِنَّ اللَّهَ نِعْمَةٌ', translation: 'Indeed, Allah is a bounty.', reference: 'Quran (various)' },
+                          { arabic: 'وَٱللَّهُ خَيْرُ الرَّازِقِينَ', translation: 'And Allah is the best of providers.', reference: 'Quran 62:11' },
+                          { arabic: 'أَمْسِكْ عَلَىٰ ذِكْرِكَ', translation: 'Hold fast to your remembrance.', reference: 'Quranic Advice' },
+                          { arabic: 'وَٱصْبِرْ لِحُكْمِ رَبِّكَ', translation: 'Be patient for the decision of your Lord', reference: 'Quran 52:48' },
+                          { arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ', translation: 'Hearts find rest in remembrance of Allah.', reference: 'Quran 13:28' },
+                          { arabic: 'وَٱذْكُرُوا نِعْمَتَ اللَّهِ', translation: 'Remember the favor of Allah.', reference: 'Quran 16:18' },
+                          { arabic: 'فَٱذْكُرُونِي أَذْكُرْكُمْ', translation: 'Remember Me and I will remember you.', reference: 'Quran 2:152' },
+                          { arabic: 'وَٱللَّهُ غَفُورٌ رَحِيمٌ', translation: 'Allah is Forgiving and Merciful.', reference: 'Quran 39:53' },
+                          { arabic: 'هُوَ ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ', translation: 'He is Allah; there is no deity except Him.', reference: 'Quran 59:23' },
+                          { arabic: 'وَٱللَّهُ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', translation: 'And Allah is over all things competent.', reference: 'Quran (various)' }
+                      ],
+                      hadith: [
+                          { translation: 'The best deeds are those that bring comfort to others.', reference: 'Various' },
+                          { translation: 'Keep your heart filled with remembrance.', reference: 'Prophetic Saying' },
+                          { translation: 'Speak softly and be gentle.', reference: 'Sahih Bukhari' },
+                          { translation: 'The Prophet encouraged mercy and calmness.', reference: 'Sahih Muslim' },
+                          { translation: 'Make dua and seek solace in prayer.', reference: 'Various' },
+                          { translation: 'Be grateful and you will be given more.', reference: 'Sunan Ibn Majah' },
+                          { translation: 'A calm heart is full of faith.', reference: 'Prophetic Saying' },
+                          { translation: 'Patience and prayer bring peace.', reference: 'Sahih Muslim' },
+                          { translation: 'Comfort others with kind words.', reference: 'Sahih Muslim' },
+                          { translation: 'Share peaceful company with friends.', reference: 'Various' },
+                          { translation: 'Maintain gratitude in heart and speech.', reference: 'Prophetic Saying' },
+                          { translation: 'Turn to the Quran for tranquility.', reference: 'Various' },
+                          { translation: 'A thankful heart sees ease.', reference: 'Prophetic Saying' },
+                          { translation: 'Bring peace by forgiving others.', reference: 'Sahih Muslim' },
+                          { translation: 'Gentleness wins hearts.', reference: 'Sahih Bukhari' },
+                          { translation: 'Be constant in small acts of worship.', reference: 'Prophetic Saying' },
+                          { translation: 'Let your actions calm those around you.', reference: 'Various' },
+                          { translation: 'Pray for peace and live gently.', reference: 'Prophetic Saying' },
+                          { translation: 'Keep your tongue moist with dhikr.', reference: 'Sahih Muslim' },
+                          { translation: 'Be a source of comfort to others.', reference: 'Various' }
+                      ]
+                  }
+              };
+
+              // DOM elements
+              const emotionButtons = document.querySelectorAll('.emotion-btn');
+              const quranArabic = document.getElementById('quran-arabic');
+              const quranTranslation = document.getElementById('quran-translation');
+              const quranReference = document.getElementById('quran-reference');
+              const hadithTranslation = document.getElementById('hadith-translation');
+              const hadithReference = document.getElementById('hadith-reference');
+              const copyBtn = document.getElementById('copy-btn');
+              const anotherBtn = document.getElementById('another-btn');
+              const chatDisplay = document.getElementById('chat-display');
+              const chatInput = document.getElementById('chat-input');
+              const sendBtn = document.getElementById('send-btn');
+
+              // Function to show loading indicator without wiping existing content
+              function showLoading(element, show) {
+                  if (!element) return;
+                  if (show) {
+                      if (element.querySelector('[data-loader]')) return;
+                      const loader = document.createElement('div');
+                      loader.setAttribute('data-loader', 'true');
+                      loader.className = 'flex items-center justify-center gap-2 py-4';
+                      loader.innerHTML = `
+                          <div class="flex items-center gap-1">
+                              <span class="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style="animation-delay: 0s"></span>
+                              <span class="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                              <span class="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                          </div>
+                          <span class="text-sm text-pink-500">Preparing something special...</span>
+                      `;
+                      element.appendChild(loader);
+                  } else {
+                      const existing = element.querySelector('[data-loader]');
+                      if (existing) existing.remove();
+                  }
+              }
+
+              // Generate verses purely from mock data (no AI). Picks a random entry from arrays.
+              async function generateVerses(emotion) {
+                  if (isLoading) return;
+                  isLoading = true;
+
+                  const e = (emotion || '').toLowerCase();
+
+                  showLoading(quranArabic, true);
+                  showLoading(quranTranslation, true);
+                  showLoading(quranReference, true);
+                  showLoading(hadithTranslation, true);
+                  showLoading(hadithReference, true);
+
+                  // simulate a small loading delay for UX
+                  await new Promise(r => setTimeout(r, 350 + Math.random() * 450));
+
+                  try {
+                      const bucket = mockData[e] || mockData.calm;
+                      const q = pickRandom(bucket.quran) || { arabic: '', translation: '', reference: '' };
+                      const h = pickRandom(bucket.hadith) || { translation: '', reference: '' };
+
+                      quranArabic.textContent = q.arabic || '';
+                      quranTranslation.textContent = q.translation || '';
+                      quranReference.textContent = q.reference || '';
+
+                      hadithTranslation.textContent = h.translation || '';
+                      hadithReference.textContent = h.reference || '';
+
+                      copyBtn.classList.remove('hidden');
+                      anotherBtn.classList.remove('hidden');
+                      copyBtn.disabled = false;
+                      anotherBtn.disabled = false;
+                  } catch (err) {
+                      console.error('Error picking mock data:', err);
+                  } finally {
+                      isLoading = false;
+                      showLoading(quranArabic, false);
+                      showLoading(quranTranslation, false);
+                      showLoading(quranReference, false);
+                      showLoading(hadithTranslation, false);
+                      showLoading(hadithReference, false);
+                  }
+              }
+
+              // Chatbot: frontend-only canned supportive replies (no AI calls)
+              const cannedReplies = {
+                  default: [
+                      'I hear you. Take a slow breath — one step at a time.',
+                      'It helps to name one small thing you’re grateful for today.',
+                      'You’re not alone; sharing this is a brave step.',
+                      'Try a short breathing exercise: inhale 4, hold 4, exhale 6.',
+                      'Small consistent actions bring change over time.'
+                  ],
+                  calm: [
+                      'That sounds peaceful — keep holding on to what grounds you.',
+                      'A gentle reminder: you can return to your breath anytime.'
+                  ],
+                  sad: [
+                      'I’m sorry you’re feeling this way. Consider a small kindness for yourself today.',
+                      'It’s okay to rest; healing takes time.'
+                  ],
+                  angry: [
+                      'Try stepping away for a moment and taking deep breaths.',
+                      'Counting to ten can sometimes help to pause and reflect.'
+                  ],
+                  depressed: [
+                      'If things feel heavy, consider reaching out to someone you trust.',
+                      'Small routines can create small anchors — one tiny step helps.'
+                  ]
+              };
+
+              async function sendChatMessage(message) {
+                  if (isLoading) return;
+                  isLoading = true;
+
+                  // Add user message with enhanced styling
+                  const userBubble = document.createElement('div');
+                  userBubble.className = 'chat-bubble-user p-4 rounded-lg max-w-xs ml-auto bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-md';
+                  userBubble.textContent = message;
+                  chatDisplay.appendChild(userBubble);
+                  chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+                  // Show typing indicator
+                  const typingIndicator = document.createElement('div');
+                  typingIndicator.className = 'chat-bubble-ai p-3 rounded-lg max-w-xs flex items-center gap-2 bg-gray-100';
+                  typingIndicator.innerHTML = '<span class="loading"></span><span class="text-sm text-gray-500">Typing...</span>';
+                  chatDisplay.appendChild(typingIndicator);
+                  chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+                  // Simulate thoughtful response time
+                  await new Promise(r => setTimeout(r, 1000 + Math.random() * 1000));
+
+                  try {
+                      // Remove typing indicator
+                      typingIndicator.remove();
+
+                      const e = currentEmotion || 'default';
+                      const pool = cannedReplies[e] || cannedReplies.default;
+                      const reply = pickRandom(pool) || cannedReplies.default[0];
+
+                      // Add bot response with enhanced styling
+                      const aiBubble = document.createElement('div');
+                      aiBubble.className = 'chat-bubble-ai p-4 rounded-lg max-w-xs bg-white border border-pink-200 shadow-sm';
+
+                      // Add bot icon
+                      const botIcon = document.createElement('div');
+                      botIcon.className = 'flex items-center gap-2 mb-2 text-pink-600 text-sm';
+                      botIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>Soul Comfort</span>';
+                      aiBubble.appendChild(botIcon);
+
+                      // Add message text
+                      const messageText = document.createElement('p');
+                      messageText.className = 'text-gray-700';
+                      messageText.textContent = reply;
+                      aiBubble.appendChild(messageText);
+
+                      chatDisplay.appendChild(aiBubble);
+                      chatDisplay.scrollTop = chatDisplay.scrollHeight;
+                  } catch (err) {
+                      console.error('Chat error:', err);
+                  } finally {
+                      isLoading = false;
+                  }
+              }
+
+              // Event listeners for emotion buttons
+              document.querySelectorAll('.emotion-btn[data-emotion]').forEach(btn => {
+                  btn.addEventListener('click', () => {
+                      currentEmotion = btn.dataset.emotion;
+                      updateEmotionDisplay(currentEmotion);
+                      generateVerses(currentEmotion);
+                  });
+                  // Keyboard accessibility
+                  btn.addEventListener('keydown', (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          btn.click();
+                      }
+                  });
+              });
+
+              // Another button
+              anotherBtn.addEventListener('click', () => {
+                  if (currentEmotion) {
+                      generateVerses(currentEmotion);
+                  }
+              });
+
+              // Copy button
+              copyBtn.addEventListener('click', () => {
+                  const content = `
+      Quranic Verse:
+      Arabic: ${quranArabic.textContent}
+      Translation: ${quranTranslation.textContent}
+      Reference: ${quranReference.textContent}
+
+      Hadith:
+      Translation: ${hadithTranslation.textContent}
+      Reference: ${hadithReference.textContent}
+                  `;
+                  navigator.clipboard.writeText(content).then(() => {
+                      alert('Content copied to clipboard!');
+                  });
+              });
+    </script>
+  </body>
+</html>
