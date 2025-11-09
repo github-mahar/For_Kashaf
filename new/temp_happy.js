@@ -1,0 +1,22 @@
+                quran: [
+                    { arabic: 'قُلْ بِفَضْلِ اللَّهِ وَبِرَحْمَتِهِ فَبِذَٰلِكَ فَلْيَفْرَحُوا', translation: 'Say, "In the bounty of Allah and in His mercy - in that let them rejoice."', reference: 'Quran 10:58' },
+                    { arabic: 'لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ', translation: 'If you are grateful, I will surely increase you [in favor].', reference: 'Quran 14:7' },
+                    { arabic: 'فَبَشِّرْ عِبَادِ', translation: 'So give tidings to My servants.', reference: 'Quran 39:17' },
+                    { arabic: 'وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ', translation: 'But as for the favor of your Lord, declare it.', reference: 'Quran 93:11' },
+                    { arabic: 'فَإِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ', translation: 'Indeed, Allah is appreciative and knowing.', reference: 'Quran 2:158' },
+                    { arabic: 'ادْخُلُوهَا بِسَلَامٍ آمِنِينَ', translation: 'Enter it in peace, safe [and secure].', reference: 'Quran 15:46' },
+                    { arabic: 'وُجُوهٌ يَوْمَئِذٍ نَّاضِرَةٌ', translation: 'Some faces that Day will be radiant,', reference: 'Quran 75:22' },
+                    { arabic: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ', translation: 'Upon thrones, facing one another.', reference: 'Quran 15:47' },
+                    { arabic: 'مَنْ عَمِلَ صَالِحًا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً', translation: 'Whoever does righteousness, whether male or female, while he is a believer - We will surely cause him to live a good life.', reference: 'Quran 16:97' },
+                    { arabic: 'أَجْرًا عَظِيمًا', translation: 'A great reward.', reference: 'Quran 4:144' },
+                    { arabic: 'وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ', translation: 'And whatever you have of favor - it is from Allah.', reference: 'Quran 16:53' },
+                    { arabic: 'وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ', translation: 'And your Lord is going to give you, and you will be satisfied.', reference: 'Quran 93:5' },
+                    { arabic: 'وَالَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ فِي رَوْضَاتِ الْجَنَّاتِ', translation: 'But those who believed and did righteous deeds will be in the gardens of Paradise.', reference: 'Quran 42:22' },
+                    { arabic: 'وَهُدُوا إِلَى الطَّيِّبِ مِنَ الْقَوْلِ وَهُدُوا إِلَىٰ صِرَاطِ الْحَمِيدِ', translation: 'And they had been guided to [indulge in] good speech, and they had been guided to the path of the Praiseworthy.', reference: 'Quran 22:24' },
+                    { arabic: 'رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ', translation: 'My Lord, enable me to be grateful for Your favor which You have bestowed upon me.', reference: 'Quran 27:19' },
+                    { arabic: 'وَتَزَوَّدُوا فَإِنَّ خَيْرَ الزَّادِ التَّقْوَىٰ', translation: 'And take provision, but indeed, the best provision is righteousness.', reference: 'Quran 2:197' },
+                    { arabic: 'يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمُ', translation: 'O mankind, fear your Lord.', reference: 'Quran 22:1' },
+                    { arabic: 'وَمَن يُطِعِ اللَّهَ وَالرَّسُولَ فَأُولَٰئِكَ مَعَ الَّذِينَ أَنْعَمَ اللَّهُ عَلَيْهِم', translation: 'And whoever obeys Allah and the Messenger will be with those upon whom Allah has bestowed favor.', reference: 'Quran 4:69' },
+                    { arabic: 'جَزَاءً وِفَاقًا', translation: '[As] fitting recompense.', reference: 'Quran 78:26' },
+                    { arabic: 'أُولَٰئِكَ لَهُمُ الْأَمْنُ وَهُم مُّهْتَدُونَ', translation: 'For them is security and they are [rightly] guided.', reference: 'Quran 6:82' }
+                ]
